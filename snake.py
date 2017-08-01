@@ -42,7 +42,9 @@ for i in range(START_LENGTH):
     snake.goto(x_pos,  ) #Move snake to new (x,y)
 
     #Append the new position tuple to pos_list
-      .append(  )
+
+
+     .append(  )
 
       #save the stamp ID! you'll need to erase it later.then append
       #it to stamp_list
