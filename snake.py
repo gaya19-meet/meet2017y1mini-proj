@@ -1,3 +1,55 @@
+
+def up ():
+    global direction #snake direction is global (same everywhere)
+    direction=UP #change direction to up.
+    move_snake() #update the snake drawing <- remember me later
+    print ("You pressed the up key!")
+#2 make functions down(), left(), and right() that change direction
+def down ():
+    global direction
+    direction=DOWN
+    move_snake()
+    print ("You pressed the down key")
+def left ():
+    global direction
+    direction=LEFT
+    move_snake()
+    print ("You pressed the left key")
+def right ():
+    global direction
+    direction=RIGHT
+    move_snake()
+    print ("You pressed the right key")
+
+def move_snake():
+    my_pos = snake.pos()
+    x_pos = my_pos[0]
+    y_pos = my_pos[1]
+
+    if direction==RIGHT:
+        snake.goto(x_pos +SQUARE_SIZE, y_pos)
+        print ("You moved right!")
+    elif direction==LEFT:
+        snake.goto(x_pos - SQUARE_SIZE, y_pos)
+        print("You moved left!")
+    elif direction==DOWN:
+        snake.goto(x_pos, y_pos - SQUARE_SIZE)
+        print("You moved down!")
+    elif direction==UP:
+        snake.goto(x_pos, y_pos + SQUARE_SIZE)
+        print("You moved up!")
+
+    my_pos=snake.pos()
+    pos_list.append(my_pos)
+    new_stamp = snake.stamp()
+    stamp_list.append(new_stamp)
+    old_stamp = stamp_list.pop(0)
+    snake.clearstamp(old_stamp)
+    pos_list.pop(0)
+
+
+##############################3
+
 import turtle
 import random #we'll need this later in the lab
 
@@ -44,10 +96,10 @@ UP_ARROW = "Up" #make sure you pay attention to upper and lower
                 #case.
 LEFT_ARROW = "Left" #pay attention to upper and lower case.
 DOWN_ARROW = "Down" #pay attention to upper and lower case.
-RIGHE_ARROW = "Right" #pat attenion to upper and lower case.
+RIGHT_ARROW = "Right" #pat attenion to upper and lower case.
 TIME_STEP = "100" #update snake position after this many
                   #millisceonds.
-SPACEBAR - "Space"#careful, it's not supposed to be capitalized!.
+SPACEBAR = "space"#careful, it's not supposed to be capitalized!.
 UP = 0
 #1. Make variables LEFT,DOWN, and RIGHT with values 1, 2 and 3
 #####WRIGHT YOUR CODE HERE!!!
@@ -56,27 +108,7 @@ LEFT = 2
 RIGHT = 3
 direction = UP
 
-def up ():
-    global direction #snake direction is global (same everywhere)
-    direction=UP #change direction to up.
-    move_snake() #update the snake drawing <- remember me later
-    print ("You pressed the up key!")
-#2 make functions down(), left(), and right() that change direction
-def down ():
-    global direction
-    direction=DOWN
-    move_snake()
-    print ("You pressed the down key")
-def left ():
-    global direction
-    direction=LEFT
-    move_snake()
-    print ("You pressed the left key")
-def right ():
-    global direction
-    direction=RIGHT
-    move_snake()
-    print ("You pressed the right key")
+
     
 turtle.onkeypress(up, UP_ARROW)
 turtle.onkeypress(down, DOWN_ARROW)
@@ -84,17 +116,5 @@ turtle.onkeypress(left, LEFT_ARROW)
 turtle.onkeypress(right, RIGHT_ARROW)
 turtle.listen()
 
-def move_snake():
-    my_pos = snake.pos()
-    x_pos = my_pos [0]
-    y_pos = my_pos[1]
 
-    if direction==RIGHT:
-        snake.goto(x_pos +SQUARE_SIZE, y_pos)
-        print ("You moved right!")
-    elif direction==LEFT:
-        snake.goto(x_pos - SQUARE_SIZE, y_pos)
-        print("You moved left!")
 
-        my_pos=snake.pos()
-        pos_list.append
