@@ -12,7 +12,7 @@ turtle.penup()
 SQUARE_SIZE = 20
 START_LENGTH = 6
 
-#Intiialize lists
+#Intialize lists
 pos_list = []
 stamp_list = []
 food_pos = []
@@ -32,22 +32,69 @@ turtle.hideturtle()
 for i in range(START_LENGTH):
     x_pos=snake.pos()[0] #get x-position with snake.pos() [0]
     y_pos=snake.pos()[1]
-
-
-    #Add SQUARE_SIZE to x_pos. Where does x_pos point to now?
-    #You're RIGHT!
+    # add SQUARE_SIZE
     x_pos = x_pos + SQUARE_SIZE
+    my_pos = (x_pos, y_pos)
+    snake.goto(x_pos, y_pos)
+    pos_list.append(my_pos)
+    stamp_id = snake.stamp()
+    stamp_list.append(stamp_id)
 
-    my_pos = (x_pos, y_pos) #Store position variables in the tuple
-    snake.goto(x_pos,  ) #Move snake to new (x,y)
+UP_ARROW = "Up" #make sure you pay attention to upper and lower
+                #case.
+LEFT_ARROW = "Left" #pay attention to upper and lower case.
+DOWN_ARROW = "Down" #pay attention to upper and lower case.
+RIGHE_ARROW = "Right" #pat attenion to upper and lower case.
+TIME_STEP = "100" #update snake position after this many
+                  #millisceonds.
+SPACEBAR - "Space"#careful, it's not supposed to be capitalized!.
+UP = 0
+#1. Make variables LEFT,DOWN, and RIGHT with values 1, 2 and 3
+#####WRIGHT YOUR CODE HERE!!!
+DOWN = 1
+LEFT = 2
+RIGHT = 3
+direction = UP
 
-    #Append the new position tuple to pos_list
+def up ():
+    global direction #snake direction is global (same everywhere)
+    direction=UP #change direction to up.
+    move_snake() #update the snake drawing <- remember me later
+    print ("You pressed the up key!")
+#2 make functions down(), left(), and right() that change direction
+def down ():
+    global direction
+    direction=DOWN
+    move_snake()
+    print ("You pressed the down key")
+def left ():
+    global direction
+    direction=LEFT
+    move_snake()
+    print ("You pressed the left key")
+def right ():
+    global direction
+    direction=RIGHT
+    move_snake()
+    print ("You pressed the right key")
+    
+turtle.onkeypress(up, UP_ARROW)
+turtle.onkeypress(down, DOWN_ARROW)
+turtle.onkeypress(left, LEFT_ARROW)
+turtle.onkeypress(right, RIGHT_ARROW)
+turtle.listen()
 
+def move_snake():
+    my_pos = snake.pos()
+    x_pos = my_pos [0]
+    y_pos = my_pos[1]
 
-     .append(  )
+    if direction==RIGHT:
+        snake.goto(x_pos +SQUARE_SIZE, y_pos)
+        print ("You moved right!")
+    elif direction==LEFT:
+        snake.goto(x_pos - SQUARE_SIZE, y_pos)
+        print("You moved left!")
 
-      #save the stamp ID! you'll need to erase it later.then append
-      #it to stamp_list
-       = snake.stamp()
-        .append( )
-        
+        my_pos=snake.pos()
+        pos_list.append
