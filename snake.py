@@ -92,22 +92,37 @@ turtle.onkeypress(left, LEFT_ARROW)
 turtle.onkeypress(right, RIGHT_ARROW)
 turtle.listen()
 
-##def make_food():
-##    #The screen positions go from -SIZE/2 to +SIZE/2
-##    #But we need to make food pieces only appear on game squares
-##    #So we cut up the game board into multiples of SQUARE_SIZE.
-##    min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
-##    max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-##    min_y=-int(SIZE_y/2/SQUARE_SIZE)-1
-##    max_y=int(SIZE_y/2/SQUARE_SIZE)+1
+def make_food():
+    #The screen positions go from -SIZE/2 to +SIZE/2
+    #But we need to make food pieces only appear on game squares
+    #So we cut up the game board into multiples of SQUARE_SIZE.
+    min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
+    max_x=int(SIZE_X/2/SQUARE_SIZE)-1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)+1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)-1
 
-    #Pick a position that is a random multiple os SQUARE_SIZE 
+    #Pick a position that is a random multiple os SQUARE_SIZE
+    food_x = random.randint(min_x,max_x)*SQUARE_SIZE
+    food_y = random.randint(min_y,max_y)*SQUARE_SIZE
+
+    ##1.WRITE YOUR CODE HERE:
+    #make the food turtle go to the randomly-generated position
+    food.goto(food_x,food_y)
+    #2.WRITE YOUR CODE HERE:Add the food turtle's positionto to the food
+    #position list
+    food_pos_now=(food_x,food_y)
+    food_pos.append(food_pos_now)
+    #3.WRITE YOUR CODE HERE:Add the food turtle's stamp to the food stamps list
+    food_stamp_id = food.stamp()
+    food_stamps.append(food_stamp_id)
+                            
 def move_snake():
     my_pos = snake.pos()
     x_pos = my_pos[0]
     y_pos = my_pos[1]
 
     if direction==RIGHT:
+
         snake.goto(x_pos +SQUARE_SIZE, y_pos)
         print ("You moved right!")
     elif direction==LEFT:
@@ -131,10 +146,12 @@ def move_snake():
     #If snake is on top of the food item
     if snake.pos() in food_pos:
         food_ind=food_pos.index(snake.pos()) #what does this do?
+                                            #(tell whiche of the 4 food get eaten. )
         food.clearstamp(food_stamps[food_ind]) #Remove eaten food stamp
         food_pos.pop(food_ind) #Remove eaten food position
         food_stamps.pop(food_ind) #Remove eaten food stamp
         print ("You have eaten the food!")
+        make_food()
                          
     #Grab position of snake
     new_pos = snake.pos()
