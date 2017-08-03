@@ -92,8 +92,16 @@ turtle.onkeypress(left, LEFT_ARROW)
 turtle.onkeypress(right, RIGHT_ARROW)
 turtle.listen()
 
+##def make_food():
+##    #The screen positions go from -SIZE/2 to +SIZE/2
+##    #But we need to make food pieces only appear on game squares
+##    #So we cut up the game board into multiples of SQUARE_SIZE.
+##    min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
+##    max_x=int(SIZE_X/2/SQUARE_SIZE)-1
+##    min_y=-int(SIZE_y/2/SQUARE_SIZE)-1
+##    max_y=int(SIZE_y/2/SQUARE_SIZE)+1
 
-
+    #Pick a position that is a random multiple os SQUARE_SIZE 
 def move_snake():
     my_pos = snake.pos()
     x_pos = my_pos[0]
@@ -120,6 +128,14 @@ def move_snake():
     snake.clearstamp(old_stamp)
     pos_list.pop(0)
 
+    #If snake is on top of the food item
+    if snake.pos() in food_pos:
+        food_ind=food_pos.index(snake.pos()) #what does this do?
+        food.clearstamp(food_stamps[food_ind]) #Remove eaten food stamp
+        food_pos.pop(food_ind) #Remove eaten food position
+        food_stamps.pop(food_ind) #Remove eaten food stamp
+        print ("You have eaten the food!")
+                         
     #Grab position of snake
     new_pos = snake.pos()
     new_x_pos = new_pos[0]
@@ -144,7 +160,7 @@ def move_snake():
     turtle.ontimer(move_snake,TIME_STEP)  #<---------new line here
 move_snake()
 
-turtle.mainloop()
+
 
 turtle.register_shape ("trash.gif")    # add trush picture
                                     # make sure you have downloaded this shape
@@ -156,8 +172,14 @@ food.shape ("trash.gif")
 #locations of food
 food_pos =  [(100,100), (-100,100), (-100,-100), (100,-100) ]
 food_stamps = []
+food.hideturtle()
+
 
 for xy in food_pos:
-    
+    food.goto(xy)
+    f = food.stamp()
+    food_stamps.append(f)
     
 
+
+turtle.mainloop()
